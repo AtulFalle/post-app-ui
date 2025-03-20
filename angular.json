@@ -97,6 +97,12 @@
             ],
             "scripts": []
           }
+        },
+        "e2e": {
+          "builder": "cypress",
+          "options": {
+            "devServerTarget": "post-app:serve"
+          }
         }
       }
     }
