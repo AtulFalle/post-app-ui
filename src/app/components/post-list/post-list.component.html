@@ -1,1 +1,11 @@
-<p>post-list works!</p>
+<div class="container">
+    <button mat-fab aria-label="Example icon button with a add icon" class="add-post" matTooltip="Add Post">
+        <mat-icon>add</mat-icon> 
+      </button>
+    @for (user of [1,2,3,4,5];  track $index) {
+       <div class="post">
+
+           <app-post></app-post>
+        </div>
+        }
+</div>
