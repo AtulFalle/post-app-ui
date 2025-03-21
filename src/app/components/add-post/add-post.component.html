@@ -4,16 +4,16 @@
         <p data-cy="dialog-title">What's on your Mind!!!</p>
         <mat-form-field>
             <mat-label>Title</mat-label>
-            <input matInput formControlName="title" />
+            <input data-cy="post-title" matInput formControlName="title" />
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea data-cy="post-description" matInput formControlName="description"></textarea>
         </mat-form-field>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button color="secondary" mat-dialog-close>Cancel</button>
-    <button mat-button color="primary" mat-dialog-close (click)="savePost()" >Save</button>
+    <button mat-button color="primary" data-cy="save" mat-dialog-close (click)="savePost()" >Save</button>
 </mat-dialog-actions>

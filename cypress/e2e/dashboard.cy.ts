@@ -19,4 +19,26 @@ describe('Post App - E2E Tests', () => {
         // Ensure dialog is closed
         cy.get('.mat-mdc-dialog-container').should('not.exist');
     });
+
+    it('should open the add post dialog and submit data from fixture', function () {
+        // Load test data from fixture
+        cy.fixture('addPost').then((post) => {
+            // Open the Add Post Dialog
+            cy.get('#add-post').click();
+
+            // Verify that the dialog appears
+            cy.get('.mat-mdc-dialog-container').should('be.visible');
+
+            // Fill in the form using fixture data
+            cy.get('[data-cy="post-title"]').type(post.title);
+            cy.get('[data-cy="post-description"]').type(post.description);
+
+            // Submit the form
+            cy.get('[data-cy="save"]').click();
+
+            // Ensure dialog closes after submission
+            cy.get('.mat-mdc-dialog-container').should('not.exist');
+
+        });
+    });
 });
