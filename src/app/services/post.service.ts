@@ -14,14 +14,6 @@ export class PostService {
 
 
   getPosts(): Observable<Post[]> {
-    return of([{
-      "title": "post 1",
-      "description": "this is description for post 1"
-    },
-    {
-      "title": "post 2",
-      "description": "this is description for post 2"
-    }])
     return this.http.get<Post[]>('assets/json/get-post.json').pipe(map((res: any) => res.data));
   }
 }

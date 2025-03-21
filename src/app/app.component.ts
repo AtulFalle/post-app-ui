@@ -10,5 +10,4 @@ import { HeaderComponent } from './shared/header/header.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'post-app';
 }
