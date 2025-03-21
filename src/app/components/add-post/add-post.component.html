@@ -1,1 +1,19 @@
-<p>add-post works!</p>
+<h2 mat-dialog-title>Add Post</h2>
+<mat-dialog-content>
+    <div [formGroup]="postForm" class="form">
+        <p>What's on your Mind!!!</p>
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="secondary" mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" mat-dialog-close (click)="savePost()" >Save</button>
+</mat-dialog-actions>
