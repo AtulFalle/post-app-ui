@@ -40,6 +40,8 @@ export class PostListComponent implements OnInit {
     const dialogRef = this.dialog.open(AddPostComponent, { width: '40vw' });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.store.dispatch(postActions.load());
+
     });
   }
 }

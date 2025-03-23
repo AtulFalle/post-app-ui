@@ -3,10 +3,10 @@
     (click)="addPost()">
     <mat-icon>add</mat-icon>
   </button>
-  @for (user of (posts$ | async); track $index) {
+  @for (post of (posts$ | async); track $index) {
   <div class="post">
 
-    <app-post></app-post>
+    <app-post [post]="post"></app-post>
   </div>
   }
 </div>
