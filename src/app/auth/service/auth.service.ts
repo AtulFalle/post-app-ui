@@ -32,11 +32,8 @@ export class AuthService {
     // ✅ Remove stored JWT token
     localStorage.removeItem('jwt'); // or sessionStorage.removeItem('token');
 
-    // ✅ Optional: Revoke Google session (works only if user is logged in via Google)
-    window.open('https://accounts.google.com/logout', '_blank');
-
     // ✅ Redirect to login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
   isAuthenticated(): boolean {
     return !!localStorage.getItem('jwt');
