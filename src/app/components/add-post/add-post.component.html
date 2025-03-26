@@ -5,11 +5,17 @@
         <mat-form-field>
             <mat-label>Title</mat-label>
             <input data-cy="post-title" matInput formControlName="title" />
+            @if (getControl('title').invalid) {
+                <mat-error>Title Required</mat-error>
+              }
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Description</mat-label>
             <textarea data-cy="post-description" matInput formControlName="description"></textarea>
+            @if (getControl('description').invalid) {
+                <mat-error>Description Required</mat-error>
+              }
         </mat-form-field>
     </div>
 </mat-dialog-content>

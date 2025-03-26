@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {
@@ -30,6 +30,10 @@ export class AddPostComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.max(300)]]
     })
+  }
+
+  getControl(control: string): FormControl {
+    return this.postForm.get(control) as FormControl;
   }
 
   savePost(): void {
