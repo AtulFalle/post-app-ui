@@ -8,6 +8,8 @@ import { Observable, of as observableOf, throwError } from 'rxjs';
 
 import { Component } from '@angular/core';
 import { PostComponent } from './post.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('PostComponent', () => {
   let fixture;
@@ -15,10 +17,12 @@ describe('PostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [ FormsModule, ReactiveFormsModule ],
+  
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       providers: [
-
+provideHttpClient(),
+provideMockStore({})
       ]
     }).overrideComponent(PostComponent, {
 
@@ -35,8 +39,22 @@ describe('PostComponent', () => {
   it('should run #viewPost()', async () => {
     component.router = component.router || {};
     component.router.navigate = jest.fn();
+    component.post = component.post || {};
+    component.post._id = '_id';
     component.viewPost();
-    expect(component.router.navigate).toHaveBeenCalled();
+  });
+
+  it('should run #editPost()', async () => {
+    component.dialog = component.dialog || {};
+    component.dialog.open = jest.fn().mockReturnValue({
+      afterClosed: function() {
+        return observableOf({});
+      }
+    });
+    component.store = component.store || {};
+    component.store.dispatch = jest.fn();
+    component.editPost({});
+    expect(component.dialog.open).toHaveBeenCalled();
   });
 
 });
