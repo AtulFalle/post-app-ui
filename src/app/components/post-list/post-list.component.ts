@@ -44,4 +44,5 @@ export class PostListComponent implements OnInit {
 
     });
   }
+
 }

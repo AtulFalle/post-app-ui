@@ -26,4 +26,9 @@ export class PostService {
   getPostById(id: string): Observable<Post> {
     return this.http.get<Post>(`${this.apiUrl}/posts/${id}`);
   }
+
+  updatePost(post: Post, id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/posts/${id}`, post);
+
+  }
 }

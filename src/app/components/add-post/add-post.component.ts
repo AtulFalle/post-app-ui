@@ -6,6 +6,7 @@ import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import {
+  MAT_DIALOG_DATA,
   MatDialogModule,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +23,7 @@ export class AddPostComponent implements OnInit {
   fb = inject(FormBuilder);
   _snackBar = inject(MatSnackBar);
   postService = inject(PostService)
+  data = inject(MAT_DIALOG_DATA);
 
   postForm!: FormGroup;
 
@@ -30,6 +32,10 @@ export class AddPostComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.max(300)]]
     })
+
+    if (this.data) {
+      this.postForm.patchValue(this.data.post)
+    }
   }
 
   getControl(control: string): FormControl {
@@ -44,16 +50,30 @@ export class AddPostComponent implements OnInit {
         duration: 3000
       });
     },
-  (e) => {
-    this._snackBar.open('Error while adding Post', 'OK', {
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      duration: 3000
-    });
-  })
-
-
+      (e) => {
+        this._snackBar.open('Error while adding Post', 'OK', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          duration: 3000
+        });
+      })
   }
 
+  updatePost(): void {
+    this.postService.updatePost(this.postForm.value, this.data.post._id).subscribe((_) => {
+      this._snackBar.open('Post Updated successfully!!!!', 'OK', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+    },
+      (e) => {
+        this._snackBar.open('Error while adding Post', 'OK', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          duration: 3000
+        });
+      })
+  }
 
 }

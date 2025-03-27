@@ -23,19 +23,25 @@ export class AuthService {
     this.http
       .post(`${environment.apiUrl}/auth/google`, { code })
       .subscribe((res: any) => {
-        localStorage.setItem('jwt', res.access_token);
+        sessionStorage.setItem('jwt', res.access_token);
+        sessionStorage.setItem('user', res.id)
         this.router.navigate(['/dashboard']); // Redirect after login
       });
   }
 
   logout() {
     // ✅ Remove stored JWT token
-    localStorage.removeItem('jwt'); // or sessionStorage.removeItem('token');
+    sessionStorage.clear(); // or sessionStorage.removeItem('token');
 
     // ✅ Redirect to login page
     this.router.navigate(['/auth/login']);
   }
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('jwt');
+    return !!sessionStorage.getItem('jwt');
+  }
+
+  isSelfUser(id: string){
+    return id === sessionStorage.getItem('user');
+
   }
 }
